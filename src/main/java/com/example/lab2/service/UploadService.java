@@ -35,8 +35,7 @@ public class UploadService implements ExcelServiceInterface {
                 order.setStatus(row.getCell(2).getStringCellValue());
                 orderRepo.save(order);
             }catch (NullPointerException e){
-                System.out.println("Empty cell in the table");
-                e.printStackTrace();
+                throw new RuntimeException ("Пустая ячейка в таблице");
             }
         }
     }
@@ -53,8 +52,7 @@ public class UploadService implements ExcelServiceInterface {
                 orderPosition.setOrder(orderRepo.findById((int)row.getCell(3).getNumericCellValue()).get());
                 positionRepo.save(orderPosition);
             }catch (NullPointerException e){
-                System.out.println("Empty cell in the table");
-                e.printStackTrace();
+                throw new RuntimeException ("Пустая ячейка в таблице");
             }
         }
     }
@@ -71,8 +69,7 @@ public class UploadService implements ExcelServiceInterface {
                 provider.setProductName(row.getCell(3).getStringCellValue());
                 providerRepo.save(provider);
             }catch (NullPointerException e){
-                System.out.println("Empty cell in the table");
-                e.printStackTrace();
+                throw new RuntimeException ("Пустая ячейка в таблице");
             }
 
         }

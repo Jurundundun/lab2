@@ -1,7 +1,7 @@
 package com.example.lab2.controller;
 
 
-import com.example.lab2.service.WordService;
+import com.example.lab2.service.DownloadService;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -13,9 +13,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 @RequestMapping("/download")
 public class DownloadController {
-    private final WordService wordService;
+    private final DownloadService downloadService;
     @GetMapping
     public ResponseEntity<String> getFile(HttpServletResponse response) {
-        return ResponseEntity.ok().body(wordService.downloadToWord(response));
+        return ResponseEntity.ok().body(downloadService.downloadToWord(response));
     }
 }

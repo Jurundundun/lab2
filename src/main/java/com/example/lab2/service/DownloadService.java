@@ -13,7 +13,7 @@ import java.io.IOException;
 
 @Service
 @RequiredArgsConstructor
-public class WordService implements WordServiceInterface{
+public class DownloadService implements WordServiceInterface{
     private XWPFDocument document;
     private final OrderRepo orderRepo;
     private void createTitle() {
@@ -52,7 +52,7 @@ public class WordService implements WordServiceInterface{
             if (order.getWeightOfOrder() < 30 && order.getDate().getMonth().getValue() <= 6 ) {
                 tableRow = table.createRow();
                 tableRow.getCell(0).setText(String.valueOf(order.getId()));
-                tableRow.getCell(1).setText(String.valueOf(order.getDate().getYear()));
+                tableRow.getCell(1).setText(String.valueOf(order.getDate()));
                 tableRow.getCell(2).setText(order.getStatus());
                 tableRow.getCell(3).setText(String.valueOf(order.getWeightOfOrder()));
             }

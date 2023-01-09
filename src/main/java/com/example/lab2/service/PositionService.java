@@ -6,6 +6,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
+import java.util.NoSuchElementException;
+
 @Service
 @RequiredArgsConstructor
 public class PositionService implements EntityServiceInterface<PositionEntity>{
@@ -20,7 +22,7 @@ public class PositionService implements EntityServiceInterface<PositionEntity>{
 
         try {
             return positionRepo.findById(id).get();
-        }catch (EmptyResultDataAccessException e){
+        }catch (EmptyResultDataAccessException | NoSuchElementException e){
             throw new RuntimeException("Данная позиция не найдена не найден");
         }
     }

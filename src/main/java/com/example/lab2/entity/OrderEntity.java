@@ -23,7 +23,7 @@ public class OrderEntity {
     private int id;
     private LocalDate date;
     private String status;
-    @OneToMany(cascade = CascadeType.ALL,mappedBy = "order",fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "order",fetch = FetchType.EAGER, orphanRemoval = true)
     private List<PositionEntity> positionList;
     public double getWeightOfOrder(){
         double weight = 0;
