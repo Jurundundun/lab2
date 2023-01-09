@@ -1,15 +1,12 @@
 package com.example.lab2.rating;
 
-import com.example.lab2.entity.OrderEntity;
-import com.example.lab2.repo.OrderRepo;
+import com.example.lab2.entity.ProviderEntity;
+import com.example.lab2.repo.ProviderRepo;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -17,21 +14,24 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @SpringBootTest
 public class RepositoryTest {
     @Autowired
-    private OrderRepo orderRepo;
+    private ProviderRepo providerRepo;
 
     @BeforeEach
     public void cleanUp() {
-        orderRepo.deleteAll();
+        providerRepo.deleteAll();
     }
 
     @Test
-    public void createAndRetrieveOrder(){
-        OrderEntity order = new OrderEntity(2, new Date(2003,Calendar.MAY,13), "доставлен",new ArrayList<>());
-        orderRepo.save(order);
+    public void createAndRetrieveProvider(){
+        ProviderEntity provider = new ProviderEntity(2,
+                "address",
+                "+7916891416",
+                "productName");
+        providerRepo.save(provider);
 
-        List<OrderEntity> listOfOrders = orderRepo.findAll();
-        assertEquals(1, listOfOrders.size());
-        assertEquals(2, listOfOrders.stream().findFirst().get().getId());
-        assertEquals(new Date(2003,Calendar.MAY,13), listOfOrders.stream().findFirst().get().getDate() );
+        List<ProviderEntity> providerEntitys = providerRepo.findAll();
+        assertEquals(1, providerEntitys.size());
+        assertEquals(2, providerEntitys.stream().findFirst().get().getId());
+        assertEquals("+7916891416", providerEntitys.stream().findFirst().get().getPhoneNumber());
     }
 }
