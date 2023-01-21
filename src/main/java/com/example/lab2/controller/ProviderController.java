@@ -11,12 +11,12 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/provider")
 public class ProviderController {
     private final ProviderService providerService;
-    @GetMapping("/all")
+    @GetMapping()
     public Iterable<ProviderEntity> getAll() {
         return providerService.getAll();
     }
-    @GetMapping
-    public ResponseEntity<ProviderEntity> getById(@RequestParam Integer id){
+    @GetMapping("/{id}")
+    public ResponseEntity<ProviderEntity> getById(@PathVariable Integer id){
         return ResponseEntity.ok().body(providerService.getById(id));
     }
     @PostMapping
@@ -25,7 +25,11 @@ public class ProviderController {
         return ResponseEntity.ok().body(providerService.save(provider));
     }
     @DeleteMapping
-    public ResponseEntity<String> deleteById(@RequestParam Integer id) {
+    public ResponseEntity<String> delete(@RequestBody ProviderEntity provider) {
+        return ResponseEntity.ok().body(providerService.delete(provider));
+    }
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteById(@PathVariable Integer id) {
         return ResponseEntity.ok().body(providerService.deleteById(id));
     }
 }

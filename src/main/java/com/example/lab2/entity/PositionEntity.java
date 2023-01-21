@@ -2,6 +2,7 @@ package com.example.lab2.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIncludeProperties;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -17,7 +18,7 @@ import lombok.Setter;
 public class PositionEntity {
     @Id
     private int id;
-    private double weight;
+    private Double weight;
     @ManyToOne
     private ProviderEntity provider;
     @ManyToOne

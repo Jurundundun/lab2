@@ -23,10 +23,10 @@ public class OrderEntity {
     private int id;
     private LocalDate date;
     private String status;
-    @OneToMany(cascade = CascadeType.ALL,mappedBy = "order",fetch = FetchType.EAGER, orphanRemoval = true)
+    @OneToMany(cascade = CascadeType.REMOVE,mappedBy = "order",fetch = FetchType.EAGER)
     private List<PositionEntity> positionList;
     public double getWeightOfOrder(){
-        double weight = 0;
+        Double weight = 0.0;
         for(PositionEntity position : positionList){
             weight += position.getWeight();
         }

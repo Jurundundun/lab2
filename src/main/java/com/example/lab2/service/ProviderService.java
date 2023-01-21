@@ -38,6 +38,16 @@ public class ProviderService implements EntityServiceInterface<ProviderEntity>{
     }
 
     @Override
+    public String delete(ProviderEntity entity) {
+        if(providerRepo.existsById(entity.getId())){
+            providerRepo.delete(entity);
+            return "элемент удален";
+        }else {
+            return "элемент не найден";
+        }
+    }
+
+    @Override
     public String deleteById(Integer id) {
         if(providerRepo.existsById(id)){
             providerRepo.deleteById(id);

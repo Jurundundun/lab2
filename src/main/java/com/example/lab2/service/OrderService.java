@@ -2,8 +2,8 @@ package com.example.lab2.service;
 
 import com.example.lab2.entity.OrderEntity;
 import com.example.lab2.repo.OrderRepo;
+import com.example.lab2.repo.PositionRepo;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,6 +13,7 @@ import java.util.NoSuchElementException;
 @RequiredArgsConstructor
 public class OrderService implements EntityServiceInterface<OrderEntity>{
     private final OrderRepo orderRepo;
+
     @Override
     public Iterable<OrderEntity> getAll() {
         return orderRepo.findAll();
@@ -41,8 +42,16 @@ public class OrderService implements EntityServiceInterface<OrderEntity>{
     }
 
     @Override
+    public String delete(OrderEntity entity) {
+        if(orderRepo.existsById(entity.getId())){
+            orderRepo.delete(entity);
+            return "элемент удален";
+        }else {
+            return "элемент не найден";
+        }
+    }
+    @Override
     public String deleteById(Integer id) {
-        System.out.println(orderRepo.existsById(id));
         if(orderRepo.existsById(id)){
             orderRepo.deleteById(id);
             return "элемент удален";

@@ -47,7 +47,7 @@ public class UploadService implements ExcelServiceInterface {
             orderPosition = new PositionEntity();
             try {
                 orderPosition.setId((int) row.getCell(0).getNumericCellValue());
-                orderPosition.setWeight((int) row.getCell(1).getNumericCellValue());
+                orderPosition.setWeight(row.getCell(1).getNumericCellValue());
                 orderPosition.setProvider(providerRepo.findById((int)row.getCell(2).getNumericCellValue()).get());
                 orderPosition.setOrder(orderRepo.findById((int)row.getCell(3).getNumericCellValue()).get());
                 positionRepo.save(orderPosition);

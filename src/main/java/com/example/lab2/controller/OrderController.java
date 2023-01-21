@@ -16,12 +16,12 @@ import java.util.List;
 public class OrderController {
     private final OrderService orderService;
 
-    @GetMapping("/all")
+    @GetMapping()
     public Iterable<OrderEntity> getAll() {
         return orderService.getAll();
     }
-    @GetMapping()
-    public ResponseEntity<OrderEntity> getById(@RequestParam Integer id){
+    @GetMapping("/{id}")
+    public ResponseEntity<OrderEntity> getById(@PathVariable Integer id){
         return ResponseEntity.ok().body(orderService.getById(id));
     }
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
@@ -29,7 +29,11 @@ public class OrderController {
         return ResponseEntity.ok().body(orderService.save(order));
     }
     @DeleteMapping
-    public ResponseEntity<String> deleteById(@RequestParam Integer id) {
+    public ResponseEntity<String> delete(@RequestBody OrderEntity order) {
+        return ResponseEntity.ok().body(orderService.delete(order));
+    }
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteById(@PathVariable Integer id) {
         return ResponseEntity.ok().body(orderService.deleteById(id));
     }
     @GetMapping("/condition")
