@@ -28,10 +28,7 @@ public class PositionController {
     @PostMapping
     public ResponseEntity<String> save(@RequestBody PositionModel position){
         return ResponseEntity.ok().body(positionService.saveEntity(
-                PositionModel.modelToPosition(position,
-                        providerService,
-                        orderService)
-                ));
+                PositionModel.modelToPosition(position, providerService, orderService)));
     }
     @DeleteMapping
     public ResponseEntity<String> deleteEntity(@RequestBody PositionEntity position) {
